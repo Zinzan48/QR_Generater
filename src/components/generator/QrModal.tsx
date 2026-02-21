@@ -43,10 +43,11 @@ export function QrModal({
       role="dialog"
       aria-modal="true"
       aria-label="QR Code 全螢幕預覽"
+      className="modal-dark"
       onClick={onClose}
       style={{
         position: 'fixed', inset: 0,
-        background: 'rgba(0,0,0,0.88)',
+        background: 'var(--modal-overlay)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
         zIndex: 9000,
@@ -66,7 +67,7 @@ export function QrModal({
         style={{
           position: 'fixed', top: '1rem', right: '1rem', zIndex: 9001,
           padding: '0.4rem 0.875rem', fontSize: '0.75rem',
-          background: 'rgba(15,23,42,0.92)',
+          background: 'var(--glass-bg-heavy)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
         }}

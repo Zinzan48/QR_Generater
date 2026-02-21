@@ -42,6 +42,7 @@
   --glass-border:    rgba(59, 130, 246, 0.2);
   --glass:           rgba(15, 23, 42, 1);
   --glass-blur:      12px;
+  --modal-overlay:   rgba(0, 0, 0, 0.88);
 
   /* HUD */
   --hud-line:        rgba(59, 130, 246, 0.3);
@@ -104,6 +105,7 @@
   --glass-bg-heavy: rgba(255, 255, 255, 0.92);
   --glass:          rgba(255, 255, 255, 1);
   --glass-border:   rgba(37, 99, 235, 0.15);
+  --modal-overlay:  rgba(0, 0, 0, 0.85);
 
   --hud-line:        rgba(37, 99, 235, 0.2);
   --hud-line-bright: rgba(37, 99, 235, 0.45);
@@ -486,6 +488,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
+   Modal overlay — always dark regardless of theme
+   (overlay is opaque dark; light-mode variables would be invisible)
+   ============================================ */
+.modal-dark {
+  --text:           #FFFFFF;
+  --text-secondary: #E2E8F0;
+  --text-muted:     #CBD5E1;
+  --text-dim:       #94A3B8;
+  --glass-bg-heavy: rgba(15, 23, 42, 0.85);
+  --glass-border:   rgba(59, 130, 246, 0.2);
+  --hud-line:       rgba(59, 130, 246, 0.3);
+  --hud-line-bright:rgba(59, 130, 246, 0.6);
+  --primary:        #3B82F6;
+  --primary-hover:  #2563EB;
+  --primary-glow:   #60A5FA;
+  --primary-dim:    rgba(59, 130, 246, 0.15);
+  --primary-border: rgba(59, 130, 246, 0.25);
+  --bg-card:        #1E293B;
+}
+/* Beat [data-theme="light"] .hud-btn specificity inside modal */
+.modal-dark .hud-btn {
+  color: #60A5FA;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+.modal-dark .hud-btn:hover {
+  color: #FFFFFF;
+  border-color: #3B82F6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+.modal-dark .hud-btn-primary {
+  color: #60A5FA;
+  border-color: #3B82F6;
+  background: rgba(59, 130, 246, 0.15);
+}
+.modal-dark .hud-btn-primary:hover {
+  background: #3B82F6;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(59, 130, 246, 0.4);
+}
+
+/* ============================================
    Animations
    ============================================ */
 @keyframes glow-pulse {
@@ -506,9 +549,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .animate-fade-up { animation: fade-up 0.4s ease forwards; }
 
-/* Tab panel entrance */
+/* Tab panel entrance — opacity only (transform creates a containing block
+   that breaks position:fixed for portaled children in some browsers) */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 [role="tabpanel"]:not([hidden]) {
-  animation: fade-up 0.3s ease forwards;
+  animation: fade-in 0.3s ease forwards;
 }
 
 /* Textarea placeholder */

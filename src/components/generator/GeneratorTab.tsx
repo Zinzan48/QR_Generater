@@ -156,8 +156,11 @@ export function GeneratorTab() {
 
   return (
     <>
-      {/* Main grid — pb-20 on mobile so FAB doesn't cover bottom content */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-start pb-20 sm:pb-0">
+      {/* Main grid — min-h keeps right-column sticky content visible when left sections are collapsed */}
+      <div
+        className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-start pb-20 sm:pb-0"
+        style={{ minHeight: 'calc(100dvh - 7.5rem)' }}
+      >
         {/* Left — Controls */}
         <div className="glass-card p-5 sm:p-6 space-y-5">
           {/* Section 01: Content — always visible */}
