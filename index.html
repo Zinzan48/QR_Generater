@@ -2,32 +2,91 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta http-equiv="content-language" content="zh-Hant" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="QR Forge — 免費線上 QR Code 產生與解碼工具。可自訂點陣樣式、顏色、容錯等級，支援置入中央 Logo，匯出 SVG 或 PNG 格式。" />
-    <meta name="theme-color" content="#0B1120" />
-    <title>QR Forge — QR Code 產生器與解碼器</title>
-
-    <!-- Font preconnect — establish early TCP connection before CSS requests -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- dns-prefetch fallback for older browsers -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-
-    <!--
-      Google Fonts (non-blocking <link> instead of CSS @import):
-      - IBM Plex Sans: UI body text
-      - JetBrains Mono: HUD / code labels
-      - Noto Sans TC: Traditional Chinese glyphs (unicode-range subsetting auto-applied)
-      display=swap: show system font while loading (no FOIT)
-    -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+    <meta
+      name="description"
+      content="QR Forge 是免費線上 QR Code 產生器與解碼器，支援自訂點陣樣式、顏色、容錯等級、中央 Logo，並可匯出 SVG 或 PNG。"
     />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="application-name" content="QR Forge" />
+    <meta name="theme-color" content="#0B1120" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>QR Forge | 免費 QR Code 產生器與解碼器</title>
+    <link rel="canonical" href="%SITE_URL%" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph (LINE / Facebook / Instagram / Threads / LinkedIn etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="QR Forge" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:title" content="QR Forge | 免費 QR Code 產生器與解碼器" />
+    <meta
+      property="og:description"
+      content="免費線上 QR Code 產生與解碼工具，支援樣式、顏色、容錯等級、中央 Logo 與 SVG/PNG 匯出。"
+    />
+    <meta property="og:url" content="%SITE_URL%" />
+    <meta property="og:image" content="%SOCIAL_IMAGE_URL%" />
+    <meta property="og:image:secure_url" content="%SOCIAL_IMAGE_URL%" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="QR Forge 免費 QR Code 產生器與解碼器社群預覽圖"
+    />
+
+    <!-- X (Twitter) Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="QR Forge | 免費 QR Code 產生器與解碼器" />
+    <meta
+      name="twitter:description"
+      content="免費線上 QR Code 產生與解碼工具，支援樣式自訂、中央 Logo 與 SVG/PNG 匯出。"
+    />
+    <meta name="twitter:image" content="%SOCIAL_IMAGE_URL%" />
+    <meta
+      name="twitter:image:alt"
+      content="QR Forge 免費 QR Code 產生器與解碼器社群預覽圖"
+    />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "QR Forge",
+        "url": "%SITE_URL%",
+        "inLanguage": "zh-Hant",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "description": "免費線上 QR Code 產生與解碼工具，支援樣式自訂、中央 Logo 與 SVG/PNG 匯出。",
+        "image": "%SOCIAL_IMAGE_URL%",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "QR Code 內容產生",
+          "QR Code 圖片解碼",
+          "自訂點陣與角塊樣式",
+          "可置入中央 Logo",
+          "下載 SVG 與 PNG"
+        ]
+      }
+    </script>
+
   </head>
   <body>
+    <noscript>
+      <p style="padding: 1rem; text-align: center; font-family: sans-serif">
+        QR Forge 需要啟用 JavaScript 才能使用 QR Code 產生與解碼功能。
+      </p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
