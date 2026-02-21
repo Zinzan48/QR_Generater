@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { X, Download, Copy, Share2, Loader2 } from 'lucide-react'
 
 interface QrModalProps {
@@ -37,7 +38,7 @@ export function QrModal({
 
   const btnBase = { padding: '0.5rem 1.25rem', fontSize: '0.8rem' }
 
-  return (
+  const modal = (
     <div
       role="dialog"
       aria-modal="true"
@@ -48,24 +49,22 @@ export function QrModal({
         background: 'rgba(0,0,0,0.88)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
-        zIndex: 100,
+        zIndex: 9000,
         overflowY: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '4.5rem 1.5rem 1.5rem',
+        // NO justify-content:center — the classic flex+overflow scroll trap
+        // Content is centered via padding + margin:auto on inner div
+        padding: '5rem 1.5rem 2rem',
       }}
     >
-      {/* Fixed close button — always top-right regardless of scroll */}
+      {/* Fixed close button — always top-right, above scroll */}
       <button
         ref={closeBtnRef}
         type="button"
-        onClick={onClose}
+        onClick={e => { e.stopPropagation(); onClose() }}
         aria-label="關閉全螢幕預覽"
         className="hud-btn flex items-center gap-1.5 cursor-pointer"
         style={{
-          position: 'fixed', top: '1rem', right: '1rem', zIndex: 102,
+          position: 'fixed', top: '1rem', right: '1rem', zIndex: 9001,
           padding: '0.4rem 0.875rem', fontSize: '0.75rem',
           background: 'rgba(15,23,42,0.92)',
           backdropFilter: 'blur(8px)',
@@ -76,13 +75,23 @@ export function QrModal({
         關閉
       </button>
 
+      {/* Content — margin:auto centres horizontally; no vertical flex trap */}
       <div
         onClick={e => e.stopPropagation()}
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem', width: '100%', maxWidth: '90vmin' }}
+        style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          gap: '1.25rem',
+          width: '100%',
+          maxWidth: 'min(90vmin, 520px)',
+          margin: '0 auto',
+        }}
       >
-
-        {/* QR Image — <img> enables iOS native long-press "加入照片" */}
-        <div style={{ width: '80vmin', height: '80vmin', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {/* QR Image — capped at 65vmin max to leave room for buttons */}
+        <div style={{
+          width: 'min(65vmin, 420px)',
+          height: 'min(65vmin, 420px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
           {imgSrc ? (
             <img
               src={imgSrc}
@@ -155,4 +164,6 @@ export function QrModal({
       </div>
     </div>
   )
+
+  return createPortal(modal, document.body)
 }
