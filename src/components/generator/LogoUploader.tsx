@@ -17,17 +17,17 @@ export function LogoUploader({ logoUrl, onLogoChange }: LogoUploaderProps) {
 
   return (
     <div className="space-y-2">
-      <div className="hud-label">center_logo <span style={{ color: 'var(--text-dim)' }}>// optional</span></div>
+      <div className="hud-label">中央 Logo <span style={{ color: 'var(--text-dim)' }}>// 選填</span></div>
       <div className="flex items-center gap-2">
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
           className="hud-btn flex items-center gap-1.5 cursor-pointer"
           style={{ padding: '0.35rem 0.75rem' }}
-          aria-label="Upload center logo image"
+          aria-label="上傳中央 Logo 圖片"
         >
           <Upload size={13} aria-hidden="true" />
-          <span style={{ fontSize: '0.8rem' }}>{logoUrl ? 'change' : 'upload'}</span>
+          <span style={{ fontSize: '0.8rem' }}>{logoUrl ? '更換' : '上傳'}</span>
         </button>
         {logoUrl && (
           <>
@@ -57,10 +57,10 @@ export function LogoUploader({ logoUrl, onLogoChange }: LogoUploaderProps) {
                 fontSize: '0.75rem',
                 transition: 'all var(--transition-fast)',
               }}
-              aria-label="Remove center logo"
+              aria-label="移除中央 Logo"
             >
               <X size={12} aria-hidden="true" />
-              remove
+              移除
             </button>
           </>
         )}
@@ -79,7 +79,7 @@ export function LogoUploader({ logoUrl, onLogoChange }: LogoUploaderProps) {
       </div>
       {logoUrl && (
         <p style={{ fontSize: '0.7rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
-          tip: use error_correction H for best results with a logo
+          提示：置入 Logo 時建議使用容錯等級 H
         </p>
       )}
     </div>

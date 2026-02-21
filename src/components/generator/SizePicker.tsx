@@ -7,7 +7,7 @@ export function SizePicker({ value, onChange }: SizePickerProps) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <div className="hud-label">size</div>
+        <div className="hud-label">尺寸</div>
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--primary-glow)' }}>
           {value}px
         </span>
@@ -21,7 +21,7 @@ export function SizePicker({ value, onChange }: SizePickerProps) {
         value={value}
         onChange={e => onChange(Number(e.target.value))}
         style={{ width: '100%', accentColor: 'var(--primary)', cursor: 'pointer' }}
-        aria-label={`QR code size: ${value} pixels`}
+        aria-label={`QR Code 尺寸：${value} 像素`}
       />
       <div className="flex justify-between" style={{ fontSize: '0.65rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
         <span>200px</span>

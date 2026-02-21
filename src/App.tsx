@@ -18,7 +18,7 @@ function App() {
         onThemeToggle={toggle}
       />
       <main
-        aria-label="QR Forge application"
+        aria-label="QR Forge 應用程式"
         style={{
           maxWidth: 'var(--container-max)',
           margin: '0 auto',

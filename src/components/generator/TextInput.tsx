@@ -7,14 +7,14 @@ export function TextInput({ value, onChange }: TextInputProps) {
   return (
     <div className="space-y-2">
       <label htmlFor="qr-text" className="hud-label">
-        content
+        內容
       </label>
       <textarea
         id="qr-text"
         rows={3}
         value={value}
         onChange={e => onChange(e.target.value)}
-        placeholder="Enter URL or text…"
+        placeholder="輸入網址或文字…"
         style={{
           width: '100%',
           padding: '0.625rem 0.75rem',

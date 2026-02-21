@@ -38,16 +38,16 @@ export function GeneratorTab() {
       {/* Left — Controls */}
       <div className="glass-card p-5 sm:p-6 space-y-5">
         {/* Section: Content */}
-        <section className="space-y-3" aria-label="QR content input">
-          <div className="hud-label">01 / input</div>
+        <section className="space-y-3" aria-label="QR 內容輸入">
+          <div className="hud-label">01 / 輸入內容</div>
           <TextInput value={text} onChange={setText} />
         </section>
 
         <div className="hud-divider" />
 
         {/* Section: Basic Settings */}
-        <section className="space-y-3" aria-label="QR settings">
-          <div className="hud-label">02 / settings</div>
+        <section className="space-y-3" aria-label="QR 基本設定">
+          <div className="hud-label">02 / 基本設定</div>
           <ErrorCorrectionPicker value={errorLevel} onChange={setErrorLevel} />
           <SizePicker value={size} onChange={setSize} />
         </section>
@@ -55,8 +55,8 @@ export function GeneratorTab() {
         <div className="hud-divider" />
 
         {/* Section: Style */}
-        <section className="space-y-3" aria-label="QR visual style">
-          <div className="hud-label">03 / style</div>
+        <section className="space-y-3" aria-label="QR 外觀樣式">
+          <div className="hud-label">03 / 外觀樣式</div>
           <DotStylePicker value={dotType} onChange={setDotType} />
           <CornerStylePicker value={cornerType} onChange={setCornerType} />
           <ColorPicker
@@ -70,7 +70,7 @@ export function GeneratorTab() {
         <div className="hud-divider" />
 
         {/* Section: Logo + Download (combined on mobile for quick access) */}
-        <section className="space-y-4" aria-label="Logo and download">
+        <section className="space-y-4" aria-label="Logo 與匯出">
           <LogoUploader logoUrl={logoUrl} onLogoChange={setLogoUrl} />
           <div className="hud-divider" />
           <DownloadButtons onDownload={download} />
@@ -80,7 +80,7 @@ export function GeneratorTab() {
       {/* Right — Preview (sticky on large screens) */}
       <div className="lg:w-80 xl:w-96 order-first lg:order-last">
         <div style={{ position: 'sticky', top: '4rem' }} className="space-y-2">
-          <div className="hud-label">live_preview</div>
+          <div className="hud-label">即時預覽</div>
           <div
             className="hud-frame flex items-center justify-center"
             style={{
@@ -96,12 +96,12 @@ export function GeneratorTab() {
             <div
               ref={containerRef}
               role="img"
-              aria-label="QR Code Preview — updates live as you change settings"
+              aria-label="QR Code 即時預覽 — 設定變更時自動更新"
               style={{ lineHeight: 0, maxWidth: '100%', overflow: 'hidden' }}
             />
           </div>
           <p style={{ fontSize: '0.65rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>
-            // updates_automatically
+            // 即時自動更新
           </p>
         </div>
       </div>

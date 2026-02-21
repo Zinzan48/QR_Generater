@@ -29,7 +29,7 @@ export function DecodeResult({ state, onReset }: DecodeResultProps) {
     >
       {state.status === 'loading' && (
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-          // scanning...
+          // 掃描中...
         </p>
       )}
 
@@ -44,7 +44,7 @@ export function DecodeResult({ state, onReset }: DecodeResultProps) {
 
       {state.status === 'success' && (
         <div className="space-y-3">
-          <div className="hud-label">decoded_result</div>
+          <div className="hud-label">解碼結果</div>
           <div
             style={{
               padding: '0.875rem',
@@ -60,7 +60,7 @@ export function DecodeResult({ state, onReset }: DecodeResultProps) {
               overflowY: 'auto',
             }}
             aria-live="polite"
-            aria-label="Decoded QR code content"
+            aria-label="已解碼的 QR Code 內容"
           >
             {state.result}
           </div>
@@ -68,7 +68,7 @@ export function DecodeResult({ state, onReset }: DecodeResultProps) {
             <button
               type="button"
               onClick={handleCopy}
-              aria-label="Copy decoded text to clipboard"
+              aria-label="複製解碼文字至剪貼簿"
               className={`hud-btn-primary hud-btn flex items-center gap-1.5 cursor-pointer ${copied ? '' : ''}`}
               style={{ padding: '0.4rem 1rem', fontSize: '0.78rem' }}
             >
@@ -76,16 +76,16 @@ export function DecodeResult({ state, onReset }: DecodeResultProps) {
                 ? <Check size={13} aria-hidden="true" />
                 : <Copy size={13} aria-hidden="true" />
               }
-              {copied ? 'copied!' : 'copy'}
+              {copied ? '已複製！' : '複製'}
             </button>
             <button
               type="button"
               onClick={onReset}
-              aria-label="Clear result and decode another image"
+              aria-label="清除結果並解碼其他圖片"
               className="hud-btn flex items-center gap-1.5 cursor-pointer"
               style={{ padding: '0.4rem 0.875rem', fontSize: '0.78rem' }}
             >
-              clear
+              清除
             </button>
           </div>
         </div>

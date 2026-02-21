@@ -2,9 +2,9 @@ export type CornerSquareType = 'square' | 'extra-rounded' | 'dot'
 export type CornerDotType = 'square' | 'dot'
 
 const CORNER_TYPES: { value: CornerSquareType; label: string; symbol: string }[] = [
-  { value: 'square', label: 'Square', symbol: '◻' },
-  { value: 'extra-rounded', label: 'Rounded', symbol: '◯' },
-  { value: 'dot', label: 'Dot', symbol: '◉' },
+  { value: 'square', label: '方形', symbol: '◻' },
+  { value: 'extra-rounded', label: '圓角', symbol: '◯' },
+  { value: 'dot', label: '圓點', symbol: '◉' },
 ]
 
 interface CornerStylePickerProps {
@@ -15,15 +15,15 @@ interface CornerStylePickerProps {
 export function CornerStylePicker({ value, onChange }: CornerStylePickerProps) {
   return (
     <div className="space-y-2">
-      <div className="hud-label">corner_style</div>
-      <div className="flex gap-2" role="group" aria-label="QR corner style">
+      <div className="hud-label">角落樣式</div>
+      <div className="flex gap-2" role="group" aria-label="QR 角落樣式">
         {CORNER_TYPES.map(corner => {
           const isActive = value === corner.value
           return (
             <button
               key={corner.value}
               type="button"
-              aria-label={`Corner style: ${corner.label}`}
+              aria-label={`角落樣式：${corner.label}`}
               aria-pressed={isActive}
               onClick={() => onChange(corner.value)}
               style={{

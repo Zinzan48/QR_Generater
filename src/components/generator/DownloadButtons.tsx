@@ -8,13 +8,13 @@ interface DownloadButtonsProps {
 export function DownloadButtons({ onDownload, disabled = false }: DownloadButtonsProps) {
   return (
     <div className="space-y-2">
-      <div className="hud-label">export</div>
+      <div className="hud-label">匯出</div>
       <div className="flex gap-2">
         <button
           type="button"
           onClick={() => onDownload('svg')}
           disabled={disabled}
-          aria-label="Download QR code as SVG"
+          aria-label="下載 SVG 格式 QR Code"
           className="hud-btn-primary flex items-center gap-1.5 cursor-pointer"
           style={{
             padding: '0.5rem 1.25rem',
@@ -30,7 +30,7 @@ export function DownloadButtons({ onDownload, disabled = false }: DownloadButton
           type="button"
           onClick={() => onDownload('png')}
           disabled={disabled}
-          aria-label="Download QR code as PNG"
+          aria-label="下載 PNG 格式 QR Code"
           className="hud-btn flex items-center gap-1.5 cursor-pointer"
           style={{
             padding: '0.5rem 1.25rem',

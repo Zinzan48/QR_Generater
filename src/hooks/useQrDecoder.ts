@@ -21,7 +21,7 @@ export function useQrDecoder() {
       const result = await QrScanner.scanImage(source, { returnDetailedScanResult: true })
       setState({ status: 'success', result: result.data, error: '' })
     } catch {
-      setState({ status: 'error', result: '', error: 'No QR code found in image.' })
+      setState({ status: 'error', result: '', error: '圖片中未找到 QR Code。' })
     } finally {
       isDecoding.current = false
     }

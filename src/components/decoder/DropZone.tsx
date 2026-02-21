@@ -26,7 +26,7 @@ export function DropZone({ onFile, isLoading }: DropZoneProps) {
     <div
       role="button"
       tabIndex={0}
-      aria-label="Upload image to decode QR code. Drag and drop or click to browse."
+      aria-label="上傳圖片以解碼 QR Code，可拖曳、點擊選取或貼上圖片"
       onClick={() => !isLoading && inputRef.current?.click()}
       onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && !isLoading && inputRef.current?.click()}
       onDrop={handleDrop}
@@ -62,10 +62,10 @@ export function DropZone({ onFile, isLoading }: DropZoneProps) {
       </div>
       <div style={{ textAlign: 'center' }}>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: 'var(--text)', marginBottom: '0.25rem' }}>
-          {isLoading ? 'decoding...' : isDragging ? 'drop_to_decode' : 'drop_image_here'}
+          {isLoading ? '解碼中...' : isDragging ? '放開以解碼' : '拖曳圖片至此'}
         </p>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-dim)' }}>
-          // click to browse · paste image
+          // 點擊選取 · 貼上圖片
         </p>
       </div>
       <input

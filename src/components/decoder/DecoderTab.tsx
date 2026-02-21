@@ -26,11 +26,11 @@ export function DecoderTab() {
       <div className="space-y-1" style={{ marginBottom: '1.5rem' }}>
         <h2 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--text)', fontWeight: 600 }}>
           <span style={{ color: 'var(--primary)' }}>&lt;</span>
-          decode
+          解碼器
           <span style={{ color: 'var(--text-dim)' }}> /&gt;</span>
         </h2>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-dim)' }}>
-          // drop_image · click_to_browse · paste_from_clipboard
+          // 拖曳圖片 · 點擊選取 · 貼上剪貼簿
         </p>
       </div>
       <DropZone onFile={decode} isLoading={state.status === 'loading'} />

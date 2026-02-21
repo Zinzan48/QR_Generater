@@ -12,8 +12,8 @@ interface HeaderProps {
 
 export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderProps) {
   const tabs: { id: TabId; label: string }[] = [
-    { id: 'generator', label: 'generator' },
-    { id: 'decoder', label: 'decoder' },
+    { id: 'generator', label: '產生器' },
+    { id: 'decoder', label: '解碼器' },
   ]
 
   return (
@@ -34,7 +34,7 @@ export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderP
         </a>
 
         {/* Tab Navigation */}
-        <nav className="flex items-center gap-1" role="tablist" aria-label="App sections">
+        <nav className="flex items-center gap-1" role="tablist" aria-label="功能頁籤">
           {tabs.map(tab => (
             <button
               key={tab.id}

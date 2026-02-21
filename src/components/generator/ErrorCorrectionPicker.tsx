@@ -1,10 +1,10 @@
 export type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H'
 
 const LEVELS: { value: ErrorCorrectionLevel; label: string; description: string }[] = [
-  { value: 'L', label: 'L', description: '7% — Best for clean environments' },
-  { value: 'M', label: 'M', description: '15% — Recommended default' },
-  { value: 'Q', label: 'Q', description: '25% — Good for logos' },
-  { value: 'H', label: 'H', description: '30% — Best with center logo' },
+  { value: 'L', label: 'L', description: '7% — 適合環境整潔的場合' },
+  { value: 'M', label: 'M', description: '15% — 建議預設值' },
+  { value: 'Q', label: 'Q', description: '25% — 適合加入 Logo' },
+  { value: 'H', label: 'H', description: '30% — 置入中央 Logo 的最佳選擇' },
 ]
 
 interface ErrorCorrectionPickerProps {
@@ -15,8 +15,8 @@ interface ErrorCorrectionPickerProps {
 export function ErrorCorrectionPicker({ value, onChange }: ErrorCorrectionPickerProps) {
   return (
     <div className="space-y-2">
-      <div className="hud-label">error_correction</div>
-      <div className="flex gap-2" role="group" aria-label="Error correction level">
+      <div className="hud-label">容錯等級</div>
+      <div className="flex gap-2" role="group" aria-label="容錯等級選擇">
         {LEVELS.map(level => {
           const isActive = value === level.value
           return (
@@ -24,7 +24,7 @@ export function ErrorCorrectionPicker({ value, onChange }: ErrorCorrectionPicker
               key={level.value}
               type="button"
               title={level.description}
-              aria-label={`Error correction ${level.description}`}
+              aria-label={`容錯等級 ${level.description}`}
               aria-pressed={isActive}
               onClick={() => onChange(level.value)}
               style={{

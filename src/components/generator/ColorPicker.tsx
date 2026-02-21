@@ -18,11 +18,11 @@ export function ColorPicker({ dotColor, bgColor, onDotColorChange, onBgColorChan
 
   return (
     <div className="space-y-2">
-      <div className="hud-label">colors</div>
+      <div className="hud-label">顏色</div>
       <div className="flex gap-4">
         <div className="flex items-center gap-2">
           <label htmlFor="dot-color" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)', cursor: 'pointer' }}>
-            dots
+            點陣
           </label>
           <div style={swatch}>
             <input
@@ -31,7 +31,7 @@ export function ColorPicker({ dotColor, bgColor, onDotColorChange, onBgColorChan
               value={dotColor}
               onChange={e => onDotColorChange(e.target.value)}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }}
-              aria-label="QR dot color"
+              aria-label="QR 點陣顏色"
             />
             <div style={{ width: '100%', height: '100%', background: dotColor }} aria-hidden="true" />
           </div>
@@ -39,7 +39,7 @@ export function ColorPicker({ dotColor, bgColor, onDotColorChange, onBgColorChan
         </div>
         <div className="flex items-center gap-2">
           <label htmlFor="bg-color" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)', cursor: 'pointer' }}>
-            bg
+            背景
           </label>
           <div style={swatch}>
             <input
@@ -48,7 +48,7 @@ export function ColorPicker({ dotColor, bgColor, onDotColorChange, onBgColorChan
               value={bgColor}
               onChange={e => onBgColorChange(e.target.value)}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }}
-              aria-label="QR background color"
+              aria-label="QR 背景顏色"
             />
             <div style={{ width: '100%', height: '100%', background: bgColor }} aria-hidden="true" />
           </div>
