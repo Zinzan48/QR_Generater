@@ -30,7 +30,7 @@ export function DecoderTab() {
           <span style={{ color: 'var(--text-dim)' }}> /&gt;</span>
         </h2>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-dim)' }}>
-          // upload · drag-drop · paste from clipboard
+          // drop_image · click_to_browse · paste_from_clipboard
         </p>
       </div>
       <DropZone onFile={decode} isLoading={state.status === 'loading'} />

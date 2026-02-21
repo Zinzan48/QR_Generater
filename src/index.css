@@ -196,6 +196,45 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid var(--glass-border);
   }
 
+  /* Nav logo */
+  .nav-logo {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .nav-logo:hover { color: var(--primary-glow); }
+  .nav-logo-bracket { color: var(--primary); }
+  .nav-logo-slash { color: var(--text-dim); }
+
+  /* Nav tab buttons */
+  .nav-tab {
+    padding: 0.4rem 0.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    transition: color var(--transition-fast), background var(--transition-fast);
+    cursor: pointer;
+  }
+  .nav-tab:hover {
+    color: var(--text);
+    background: var(--primary-dim);
+  }
+  .nav-tab[data-active="true"] {
+    background: var(--primary-dim);
+    color: var(--primary-glow);
+  }
+  .nav-tab:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
   /* ============================================
      HUD Elements
      ============================================ */
@@ -295,6 +334,21 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
     box-shadow: 0 0 24px rgba(59,130,246,0.4);
   }
+
+  /* Focus-visible ring — works even with overflow: hidden */
+  .hud-btn:focus-visible,
+  .hud-btn-primary:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Light mode: boost text contrast on hud-btn */
+  [data-theme="light"] .hud-btn {
+    color: var(--primary-hover);
+  }
+  [data-theme="light"] .hud-btn-primary {
+    color: var(--primary-hover);
+  }
 }
 
 /* ============================================
@@ -317,6 +371,17 @@ h1, h2, h3, h4, h5, h6 {
   to   { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-up { animation: fade-up 0.4s ease forwards; }
+
+/* Tab panel entrance */
+[role="tabpanel"]:not([hidden]) {
+  animation: fade-up 0.3s ease forwards;
+}
+
+/* Textarea placeholder */
+textarea::placeholder { color: var(--text-dim); }
+
+/* Input/select base reset for consistent cross-browser */
+input[type="range"] { height: 4px; }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {

@@ -62,10 +62,10 @@ export function DropZone({ onFile, isLoading }: DropZoneProps) {
       </div>
       <div style={{ textAlign: 'center' }}>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: 'var(--text)', marginBottom: '0.25rem' }}>
-          {isLoading ? 'decoding...' : isDragging ? 'drop to decode' : 'drop_image_here'}
+          {isLoading ? 'decoding...' : isDragging ? 'drop_to_decode' : 'drop_image_here'}
         </p>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-dim)' }}>
-          // or click to browse · ctrl+v to paste
+          // click to browse · paste image
         </p>
       </div>
       <input

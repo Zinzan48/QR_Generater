@@ -25,13 +25,12 @@ export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderP
         {/* Logo — Zinzan code bracket style */}
         <a
           href="#"
-          className="font-mono text-[var(--text)] hover:text-[var(--primary)] transition-colors shrink-0 select-none"
-          style={{ fontSize: '1rem', fontWeight: 700, letterSpacing: '-0.02em', textDecoration: 'none' }}
+          className="nav-logo font-mono shrink-0 select-none"
           aria-label="QR Forge home"
         >
-          <span style={{ color: 'var(--primary)' }}>&lt;</span>
+          <span className="nav-logo-bracket">&lt;</span>
           QRForge
-          <span style={{ color: 'var(--text-dim)' }}> /&gt;</span>
+          <span className="nav-logo-slash"> /&gt;</span>
         </a>
 
         {/* Tab Navigation */}
@@ -44,31 +43,8 @@ export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderP
               aria-controls={`${tab.id}-panel`}
               id={`${tab.id}-tab`}
               onClick={() => onTabChange(tab.id)}
-              className="nav-tab-btn cursor-pointer"
-              style={{
-                padding: '0.4rem 0.875rem',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.8rem',
-                letterSpacing: '0.02em',
-                borderRadius: 'var(--radius-sm)',
-                border: 'none',
-                background: activeTab === tab.id ? 'var(--primary-dim)' : 'transparent',
-                color: activeTab === tab.id ? 'var(--primary-glow)' : 'var(--text-muted)',
-                transition: 'color var(--transition-fast), background var(--transition-fast)',
-                cursor: 'pointer',
-              }}
-              onMouseEnter={e => {
-                if (activeTab !== tab.id) {
-                  ;(e.target as HTMLElement).style.color = 'var(--text)'
-                  ;(e.target as HTMLElement).style.background = 'var(--primary-dim)'
-                }
-              }}
-              onMouseLeave={e => {
-                if (activeTab !== tab.id) {
-                  ;(e.target as HTMLElement).style.color = 'var(--text-muted)'
-                  ;(e.target as HTMLElement).style.background = 'transparent'
-                }
-              }}
+              className="nav-tab cursor-pointer"
+              data-active={activeTab === tab.id ? 'true' : undefined}
             >
               {tab.label}
             </button>

@@ -34,20 +34,20 @@ export function GeneratorTab() {
   const { containerRef, download } = useQrPreviewRef(options)
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-start">
       {/* Left — Controls */}
-      <div className="glass-card p-6 space-y-6">
+      <div className="glass-card p-5 sm:p-6 space-y-5">
         {/* Section: Content */}
-        <section className="space-y-4">
-          <div className="hud-label" style={{ marginBottom: '0.75rem' }}>01 / input</div>
+        <section className="space-y-3" aria-label="QR content input">
+          <div className="hud-label">01 / input</div>
           <TextInput value={text} onChange={setText} />
         </section>
 
         <div className="hud-divider" />
 
         {/* Section: Basic Settings */}
-        <section className="space-y-4">
-          <div className="hud-label" style={{ marginBottom: '0.75rem' }}>02 / settings</div>
+        <section className="space-y-3" aria-label="QR settings">
+          <div className="hud-label">02 / settings</div>
           <ErrorCorrectionPicker value={errorLevel} onChange={setErrorLevel} />
           <SizePicker value={size} onChange={setSize} />
         </section>
@@ -55,8 +55,8 @@ export function GeneratorTab() {
         <div className="hud-divider" />
 
         {/* Section: Style */}
-        <section className="space-y-4">
-          <div className="hud-label" style={{ marginBottom: '0.75rem' }}>03 / style</div>
+        <section className="space-y-3" aria-label="QR visual style">
+          <div className="hud-label">03 / style</div>
           <DotStylePicker value={dotType} onChange={setDotType} />
           <CornerStylePicker value={cornerType} onChange={setCornerType} />
           <ColorPicker
@@ -69,45 +69,39 @@ export function GeneratorTab() {
 
         <div className="hud-divider" />
 
-        {/* Section: Logo */}
-        <section>
+        {/* Section: Logo + Download (combined on mobile for quick access) */}
+        <section className="space-y-4" aria-label="Logo and download">
           <LogoUploader logoUrl={logoUrl} onLogoChange={setLogoUrl} />
-        </section>
-
-        <div className="hud-divider" />
-
-        {/* Section: Download */}
-        <section>
+          <div className="hud-divider" />
           <DownloadButtons onDownload={download} />
         </section>
       </div>
 
-      {/* Right — Preview (sticky on desktop) */}
-      <div className="lg:w-80 xl:w-96">
-        <div
-          style={{ position: 'sticky', top: '4.5rem' }}
-          className="space-y-3"
-        >
+      {/* Right — Preview (sticky on large screens) */}
+      <div className="lg:w-80 xl:w-96 order-first lg:order-last">
+        <div style={{ position: 'sticky', top: '4rem' }} className="space-y-2">
           <div className="hud-label">live_preview</div>
           <div
-            className="hud-frame flex items-center justify-center p-6"
+            className="hud-frame flex items-center justify-center"
             style={{
+              padding: '1.5rem',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--glass-border)',
               background: 'var(--glass-bg)',
               backdropFilter: 'blur(12px)',
-              minHeight: '320px',
+              WebkitBackdropFilter: 'blur(12px)',
+              minHeight: '280px',
             }}
           >
             <div
               ref={containerRef}
               role="img"
-              aria-label="QR Code Preview"
-              style={{ lineHeight: 0 }}
+              aria-label="QR Code Preview — updates live as you change settings"
+              style={{ lineHeight: 0, maxWidth: '100%', overflow: 'hidden' }}
             />
           </div>
           <p style={{ fontSize: '0.65rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>
-            // updates automatically
+            // updates_automatically
           </p>
         </div>
       </div>
