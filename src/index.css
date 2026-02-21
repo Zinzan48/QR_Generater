@@ -314,6 +314,17 @@ h1, h2, h3, h4, h5, h6 {
     .collapsible-grid { transition: none; }
   }
 
+  /* === Preview sticky — accounts for 2-row mobile header === */
+  .preview-sticky {
+    position: sticky;
+    top: 6.5rem; /* mobile: h-14 (3.5rem) + h-10 (2.5rem) + small gap */
+  }
+  @media (min-width: 640px) {
+    .preview-sticky {
+      top: 3.75rem; /* desktop: h-14 only */
+    }
+  }
+
   /* === QR Preview: 4-corner bracket frame with glow === */
   .hud-frame-4c {
     --cf: 20px;

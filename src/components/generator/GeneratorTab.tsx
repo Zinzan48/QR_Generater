@@ -58,7 +58,7 @@ export function GeneratorTab() {
     logoUrl,
   }
 
-  const { containerRef, download } = useQrPreviewRef(options)
+  const { containerRef, download, getBlob } = useQrPreviewRef(options)
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-start">
@@ -134,7 +134,7 @@ export function GeneratorTab() {
 
       {/* Right — Preview (sticky on large screens) */}
       <div className="lg:w-80 xl:w-96 order-first lg:order-last">
-        <div style={{ position: 'sticky', top: '4rem' }} className="space-y-2">
+        <div className="preview-sticky space-y-2">
           <div className="hud-label">即時預覽</div>
           <div className="hud-frame-4c" style={{ borderRadius: 'var(--radius-lg)', padding: '2px' }}>
             <div
@@ -161,7 +161,7 @@ export function GeneratorTab() {
           </p>
           <div className="beam-border">
             <div className="beam-border-inner">
-              <DownloadButtons onDownload={download} />
+              <DownloadButtons onDownload={download} getBlob={getBlob} />
             </div>
           </div>
         </div>
