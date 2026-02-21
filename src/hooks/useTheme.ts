@@ -8,18 +8,15 @@ function getInitialTheme(): Theme {
   try {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
     if (stored === 'light' || stored === 'dark') return stored
-  } catch {
-    // localStorage not available
-  }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  } catch { /* ignore */ }
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
 }
 
 function applyTheme(theme: Theme) {
-  const root = document.documentElement
-  if (theme === 'dark') {
-    root.classList.add('dark')
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light')
   } else {
-    root.classList.remove('dark')
+    document.documentElement.removeAttribute('data-theme')
   }
 }
 
@@ -32,15 +29,11 @@ export function useTheme() {
 
   useEffect(() => {
     applyTheme(theme)
-    try {
-      localStorage.setItem(STORAGE_KEY, theme)
-    } catch {
-      // ignore
-    }
+    try { localStorage.setItem(STORAGE_KEY, theme) } catch { /* ignore */ }
   }, [theme])
 
   const toggle = useCallback(() => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
   }, [])
 
   return { theme, toggle }

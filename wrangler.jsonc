@@ -1,0 +1,13 @@
+{
+  "name": "qr-forge",
+  "compatibility_date": "2026-02-07",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+  "observability": {
+    "enabled": false
+  },
+  "workers_dev": false,
+  "preview_urls": false
+}

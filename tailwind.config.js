@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
@@ -8,27 +7,40 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Dark theme tokens
-        'dark-bg': '#0F172A',
-        'dark-surface': '#1E293B',
-        'dark-surface2': '#334155',
-        'dark-border': '#475569',
-        'dark-muted': '#94A3B8',
-        // Light theme tokens
-        'light-bg': '#F8FAFC',
-        'light-surface': '#FFFFFF',
-        'light-surface2': '#F1F5F9',
-        'light-border': '#CBD5E1',
-        'light-muted': '#475569',
-        // Shared
-        'brand-green-dark': '#22C55E',
-        'brand-green-light': '#16A34A',
-        'brand-accent': '#3B82F6',
-        'brand-accent-light': '#2563EB',
+        // CSS variable-based tokens — auto-adapts with data-theme
+        'bg-deep':    'var(--bg-deep)',
+        'bg-surface': 'var(--bg-surface)',
+        'bg-card':    'var(--bg-card)',
+        'bg-elevated':'var(--bg-elevated)',
+        'primary':       'var(--primary)',
+        'primary-hover': 'var(--primary-hover)',
+        'primary-glow':  'var(--primary-glow)',
+        'primary-dim':   'var(--primary-dim)',
+        'glass-border':  'var(--glass-border)',
+        'accent-green':  'var(--accent-green)',
+        'text-main':     'var(--text)',
+        'text-secondary':'var(--text-secondary)',
+        'text-muted':    'var(--text-muted)',
+        'text-dim':      'var(--text-dim)',
       },
       fontFamily: {
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
-        sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', '"Cascadia Code"', '"Fira Code"', 'monospace'],
+        sans: ['"IBM Plex Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+      },
+      borderRadius: {
+        'sm': '6px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
+      },
+      boxShadow: {
+        'card':      'var(--card-shadow)',
+        'card-hover':'var(--card-shadow-hover)',
+        'glow':      '0 0 20px var(--primary-dim)',
+        'glow-lg':   '0 0 40px rgba(59, 130, 246, 0.25)',
+      },
+      backdropBlur: {
+        'glass': '12px',
       },
     },
   },

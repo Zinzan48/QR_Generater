@@ -12,24 +12,17 @@ export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
       onClick={onToggle}
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
       title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="
-        flex items-center justify-center
-        w-9 h-9 rounded-lg
-        bg-light-surface2 dark:bg-dark-surface2
-        border border-light-border dark:border-dark-border
-        text-slate-600 dark:text-slate-300
-        hover:bg-light-border dark:hover:bg-dark-border
-        hover:text-slate-900 dark:hover:text-slate-50
-        transition-colors duration-200 cursor-pointer
-        focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2
-        focus:ring-offset-light-bg dark:focus:ring-offset-dark-bg
-      "
+      className="hud-btn flex items-center gap-1.5 px-3 py-1.5 cursor-pointer"
     >
-      {theme === 'dark' ? (
-        <Sun size={18} strokeWidth={2} />
-      ) : (
-        <Moon size={18} strokeWidth={2} />
-      )}
+      <span className="relative z-10 flex items-center gap-1.5">
+        {theme === 'dark'
+          ? <Sun size={14} strokeWidth={2} aria-hidden="true" />
+          : <Moon size={14} strokeWidth={2} aria-hidden="true" />
+        }
+        <span className="text-xs hidden sm:inline">
+          {theme === 'dark' ? 'Light' : 'Dark'}
+        </span>
+      </span>
     </button>
   )
 }
