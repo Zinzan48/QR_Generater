@@ -1,5 +1,5 @@
 {
-  "name": "qr-forge",
+  "name": "qr-generater",
   "compatibility_date": "2026-02-07",
   "assets": {
     "directory": "./dist",
