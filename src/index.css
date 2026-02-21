@@ -3,7 +3,7 @@
    Aligned with Zinzan Official Site design system
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* Google Fonts loaded via <link> in index.html (non-blocking, preconnect) */
 
 @tailwind base;
 @tailwind components;
@@ -42,6 +42,7 @@
   --glass-border:    rgba(59, 130, 246, 0.2);
   --glass:           rgba(15, 23, 42, 1);
   --glass-blur:      12px;
+  --modal-overlay:   rgba(0, 0, 0, 0.88);
 
   /* HUD */
   --hud-line:        rgba(59, 130, 246, 0.3);
@@ -73,8 +74,8 @@
   --card-shadow-hover: 0 8px 32px rgba(59, 130, 246, 0.15);
 
   /* Fonts */
-  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
-  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans TC', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  --font-sans: 'IBM Plex Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* ============================================
@@ -104,6 +105,7 @@
   --glass-bg-heavy: rgba(255, 255, 255, 0.92);
   --glass:          rgba(255, 255, 255, 1);
   --glass-border:   rgba(37, 99, 235, 0.15);
+  --modal-overlay:  rgba(0, 0, 0, 0.85);
 
   --hud-line:        rgba(37, 99, 235, 0.2);
   --hud-line-bright: rgba(37, 99, 235, 0.45);
@@ -314,6 +316,54 @@ h1, h2, h3, h4, h5, h6 {
     .collapsible-grid { transition: none; }
   }
 
+  /* === Preview sticky — accounts for 2-row mobile header === */
+  .preview-sticky {
+    position: sticky;
+    top: 6.5rem; /* mobile: h-14 (3.5rem) + h-10 (2.5rem) + small gap */
+  }
+  @media (min-width: 640px) {
+    .preview-sticky {
+      top: 3.75rem; /* desktop: h-14 only */
+    }
+  }
+
+  /* === QR Container — prevent SVG/canvas overflow when size > container === */
+  .qr-preview-container > div > svg,
+  .qr-preview-container > div > canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* === Toast notification (copy to clipboard feedback) === */
+  .toast {
+    position: fixed;
+    bottom: 5.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(0.5rem);
+    background: var(--bg-card);
+    border: 1px solid var(--accent-green);
+    color: var(--accent-green);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2);
+  }
+  .toast.toast-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* === Mobile FAB download bar — safe area for iPhone notch === */
+  .mobile-fab {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
   /* === QR Preview: 4-corner bracket frame with glow === */
   .hud-frame-4c {
     --cf: 20px;
@@ -438,6 +488,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
+   Modal overlay — always dark regardless of theme
+   (overlay is opaque dark; light-mode variables would be invisible)
+   ============================================ */
+.modal-dark {
+  --text:           #FFFFFF;
+  --text-secondary: #E2E8F0;
+  --text-muted:     #CBD5E1;
+  --text-dim:       #94A3B8;
+  --glass-bg-heavy: rgba(15, 23, 42, 0.85);
+  --glass-border:   rgba(59, 130, 246, 0.2);
+  --hud-line:       rgba(59, 130, 246, 0.3);
+  --hud-line-bright:rgba(59, 130, 246, 0.6);
+  --primary:        #3B82F6;
+  --primary-hover:  #2563EB;
+  --primary-glow:   #60A5FA;
+  --primary-dim:    rgba(59, 130, 246, 0.15);
+  --primary-border: rgba(59, 130, 246, 0.25);
+  --bg-card:        #1E293B;
+}
+/* Beat [data-theme="light"] .hud-btn specificity inside modal */
+.modal-dark .hud-btn {
+  color: #60A5FA;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+.modal-dark .hud-btn:hover {
+  color: #FFFFFF;
+  border-color: #3B82F6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+.modal-dark .hud-btn-primary {
+  color: #60A5FA;
+  border-color: #3B82F6;
+  background: rgba(59, 130, 246, 0.15);
+}
+.modal-dark .hud-btn-primary:hover {
+  background: #3B82F6;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(59, 130, 246, 0.4);
+}
+
+/* ============================================
    Animations
    ============================================ */
 @keyframes glow-pulse {
@@ -458,9 +549,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .animate-fade-up { animation: fade-up 0.4s ease forwards; }
 
-/* Tab panel entrance */
+/* Tab panel entrance — opacity only (transform creates a containing block
+   that breaks position:fixed for portaled children in some browsers) */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 [role="tabpanel"]:not([hidden]) {
-  animation: fade-up 0.3s ease forwards;
+  animation: fade-in 0.3s ease forwards;
 }
 
 /* Textarea placeholder */

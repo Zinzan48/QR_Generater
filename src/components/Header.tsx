@@ -18,11 +18,12 @@ export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderP
 
   return (
     <header className="glass-nav sticky top-0 z-50">
-      <nav
-        className="flex items-center gap-6 px-[var(--container-padding)] h-14"
+      {/* Row 1 — always visible: Logo + (desktop tabs) + author + ThemeToggle */}
+      <div
+        className="flex items-center gap-4 px-[var(--container-padding)] h-14"
         style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}
       >
-        {/* Logo — Zinzan code bracket style */}
+        {/* Logo */}
         <a
           href="#"
           className="nav-logo font-mono shrink-0 select-none"
@@ -33,8 +34,8 @@ export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderP
           <span className="nav-logo-slash"> /&gt;</span>
         </a>
 
-        {/* Tab Navigation */}
-        <nav className="flex items-center gap-1" role="tablist" aria-label="功能頁籤">
+        {/* Tab Navigation — desktop only (inline) */}
+        <nav className="hidden sm:flex items-center gap-1" role="tablist" aria-label="功能頁籤">
           {tabs.map(tab => (
             <button
               key={tab.id}
@@ -51,16 +52,15 @@ export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderP
           ))}
         </nav>
 
-        {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Author link */}
+        {/* Author — desktop only */}
         <a
           href="https://www.zinzan.info"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="關於作者 Zinzan"
-          className="nav-tab"
+          className="hidden sm:flex nav-tab items-center"
           style={{ fontSize: '0.78rem', opacity: 0.75, textDecoration: 'none' }}
         >
           // 作者
@@ -68,6 +68,30 @@ export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderP
 
         {/* Theme Toggle */}
         <ThemeToggle theme={theme} onToggle={onThemeToggle} />
+      </div>
+
+      {/* Row 2 — mobile only: full-width tab bar */}
+      <nav
+        className="flex sm:hidden"
+        role="tablist"
+        aria-label="功能頁籤"
+        style={{ borderTop: '1px solid var(--glass-border)' }}
+      >
+        {tabs.map(tab => (
+          <button
+            key={tab.id}
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            aria-controls={`${tab.id}-panel`}
+            id={`${tab.id}-tab-mobile`}
+            onClick={() => onTabChange(tab.id)}
+            className="nav-tab cursor-pointer flex-1 text-center"
+            style={{ borderRadius: 0, padding: '0.6rem 0' }}
+            data-active={activeTab === tab.id ? 'true' : undefined}
+          >
+            {tab.label}
+          </button>
+        ))}
       </nav>
     </header>
   )

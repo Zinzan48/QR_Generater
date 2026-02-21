@@ -1,0 +1,10 @@
+# QR Forge — Browser targets
+# iOS 15+, modern Android, no IE, no dead
+ios >= 15
+chromeandroid >= 100
+last 2 Chrome major versions
+last 2 Edge major versions
+last 2 Firefox major versions
+last 2 Safari major versions
+not dead
+not IE 11

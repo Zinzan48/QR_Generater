@@ -26,6 +26,7 @@ export function useQrGenerator(containerRef: React.RefObject<HTMLDivElement | nu
     type: 'svg',
     data: opts.data || 'https://example.com',
     image: opts.logoUrl ?? undefined,
+    margin: 16, // quiet zone — required by QR spec, also looks much better
     qrOptions: {
       errorCorrectionLevel: opts.errorCorrectionLevel,
     },
@@ -73,5 +74,9 @@ export function useQrGenerator(containerRef: React.RefObject<HTMLDivElement | nu
     qrRef.current?.download({ name: 'qr-forge', extension: format })
   }, [])
 
-  return { download }
+  const getBlob = useCallback(async (format: 'png' | 'svg'): Promise<Blob | null> => {
+    return qrRef.current?.getRawData(format) ?? null
+  }, [])
+
+  return { download, getBlob }
 }
