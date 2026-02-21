@@ -3,7 +3,7 @@
    Aligned with Zinzan Official Site design system
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* Google Fonts loaded via <link> in index.html (non-blocking, preconnect) */
 
 @tailwind base;
 @tailwind components;
@@ -73,8 +73,8 @@
   --card-shadow-hover: 0 8px 32px rgba(59, 130, 246, 0.15);
 
   /* Fonts */
-  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
-  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans TC', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  --font-sans: 'IBM Plex Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* ============================================
@@ -323,6 +323,43 @@ h1, h2, h3, h4, h5, h6 {
     .preview-sticky {
       top: 3.75rem; /* desktop: h-14 only */
     }
+  }
+
+  /* === QR Container — prevent SVG/canvas overflow when size > container === */
+  .qr-preview-container > div > svg,
+  .qr-preview-container > div > canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* === Toast notification (copy to clipboard feedback) === */
+  .toast {
+    position: fixed;
+    bottom: 5.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(0.5rem);
+    background: var(--bg-card);
+    border: 1px solid var(--accent-green);
+    color: var(--accent-green);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2);
+  }
+  .toast.toast-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* === Mobile FAB download bar — safe area for iPhone notch === */
+  .mobile-fab {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
 
   /* === QR Preview: 4-corner bracket frame with glow === */
