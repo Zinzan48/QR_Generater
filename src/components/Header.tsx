@@ -54,6 +54,18 @@ export function Header({ activeTab, onTabChange, theme, onThemeToggle }: HeaderP
         {/* Spacer */}
         <div className="flex-1" />
 
+        {/* Author link */}
+        <a
+          href="https://www.zinzan.info"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="關於作者 Zinzan"
+          className="nav-tab"
+          style={{ fontSize: '0.78rem', opacity: 0.75, textDecoration: 'none' }}
+        >
+          // 作者
+        </a>
+
         {/* Theme Toggle */}
         <ThemeToggle theme={theme} onToggle={onThemeToggle} />
       </nav>

@@ -31,15 +31,16 @@
   --accent-green-dim: rgba(34, 197, 94, 0.15);
 
   /* Text */
-  --text:           #F8FAFC;
-  --text-secondary: #CBD5E1;
-  --text-muted:     #94A3B8;
-  --text-dim:       #64748B;
+  --text:           #FFFFFF;
+  --text-secondary: #E2E8F0;
+  --text-muted:     #CBD5E1;
+  --text-dim:       #94A3B8;
 
   /* Glass */
   --glass-bg:        rgba(15, 23, 42, 0.6);
   --glass-bg-heavy:  rgba(15, 23, 42, 0.85);
   --glass-border:    rgba(59, 130, 246, 0.2);
+  --glass:           rgba(15, 23, 42, 1);
   --glass-blur:      12px;
 
   /* HUD */
@@ -101,6 +102,7 @@
 
   --glass-bg:       rgba(255, 255, 255, 0.75);
   --glass-bg-heavy: rgba(255, 255, 255, 0.92);
+  --glass:          rgba(255, 255, 255, 1);
   --glass-border:   rgba(37, 99, 235, 0.15);
 
   --hud-line:        rgba(37, 99, 235, 0.2);
@@ -124,6 +126,7 @@
 }
 
 html {
+  font-size: 18px;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
@@ -291,6 +294,89 @@ h1, h2, h3, h4, h5, h6 {
   }
   .hud-frame:hover::before, .hud-frame:hover::after {
     border-color: var(--hud-line-bright);
+  }
+
+  /* === Collapsible sections === */
+  .collapsible-grid {
+    display: grid;
+    transition: grid-template-rows var(--transition-base);
+  }
+  .collapsible-trigger {
+    padding: 0.15rem 0;
+  }
+  .collapsible-trigger:hover {
+    color: var(--text);
+  }
+  .collapsible-trigger:hover::before {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .collapsible-grid { transition: none; }
+  }
+
+  /* === QR Preview: 4-corner bracket frame with glow === */
+  .hud-frame-4c {
+    --cf: 20px;
+    background-image:
+      linear-gradient(var(--primary), var(--primary)),
+      linear-gradient(var(--primary), var(--primary)),
+      linear-gradient(var(--primary), var(--primary)),
+      linear-gradient(var(--primary), var(--primary)),
+      linear-gradient(var(--primary), var(--primary)),
+      linear-gradient(var(--primary), var(--primary)),
+      linear-gradient(var(--primary), var(--primary)),
+      linear-gradient(var(--primary), var(--primary));
+    background-size:
+      1px var(--cf), var(--cf) 1px,
+      1px var(--cf), var(--cf) 1px,
+      1px var(--cf), var(--cf) 1px,
+      1px var(--cf), var(--cf) 1px;
+    background-position:
+      top left,     top left,
+      top right,    top right,
+      bottom left,  bottom left,
+      bottom right, bottom right;
+    background-repeat: no-repeat;
+    box-shadow:
+      0 0 0 1px rgba(59, 130, 246, 0.18),
+      0 0 28px rgba(59, 130, 246, 0.10);
+  }
+
+  /* === Animated beam border for export/download section === */
+  .beam-border {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .beam-border::before {
+    content: '';
+    position: absolute;
+    inset: -100%;
+    background: conic-gradient(
+      from 0deg,
+      transparent    0deg,
+      transparent    330deg,
+      rgba(59,130,246,0.25) 348deg,
+      rgba(96,165,250,0.95) 355deg,
+      rgba(59,130,246,0.25) 360deg
+    );
+    animation: beam-spin 3s linear infinite;
+    z-index: 0;
+  }
+  .beam-border-inner {
+    position: relative;
+    z-index: 1;
+    background: var(--glass);
+    border-radius: calc(var(--radius-md) - 1px);
+    margin: 1px;
+    padding: 0.75rem;
+  }
+  @keyframes beam-spin {
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .beam-border::before { animation: none; background: none; }
+    .beam-border { border: 1px solid var(--primary-dim); }
   }
 
   /* HUD Button */
