@@ -16,9 +16,11 @@ export function DownloadButtons({
   onShare, onDownloadPng, onDownloadSvg, onCopy,
 }: DownloadButtonsProps) {
   const isDisabled = disabled || shareLoading || copyLoading
+  // min-height: 44px per UX touch target guidelines (18px base font = 2.44rem ≈ use 2.5rem)
   const btnStyle = {
-    padding: '0.5rem 1.25rem',
-    fontSize: '0.8rem',
+    padding: '0.65rem 1.25rem',
+    fontSize: '0.85rem',
+    minHeight: '44px',
     opacity: isDisabled ? 0.4 : 1,
     cursor: isDisabled ? 'not-allowed' : 'pointer',
   }

@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { RotateCcw, RefreshCw, Maximize2 } from 'lucide-react'
 import { TextInput } from './TextInput'
 import { ErrorCorrectionPicker, type ErrorCorrectionLevel } from './ErrorCorrectionPicker'
@@ -285,21 +286,7 @@ export function GeneratorTab() {
         </div>
       </div>
 
-      {/* Mobile FAB — fixed bottom, always visible */}
-      <div
-        className="sm:hidden fixed bottom-0 left-0 right-0 z-50 mobile-fab"
-        style={{
-          background: 'var(--glass-bg-heavy)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderTop: '1px solid var(--glass-border)',
-          padding: '0.75rem 1rem',
-        }}
-      >
-        <DownloadButtons {...downloadBtnsProps} />
-      </div>
-
-      {/* Fullscreen QR Modal */}
+      {/* Fullscreen QR Modal — portal to body, immune to stacking context */}
       <QrModal
         open={modalOpen}
         imgSrc={modalImgSrc}
@@ -313,14 +300,38 @@ export function GeneratorTab() {
         onCopy={async () => { await handleCopy(); closeModal() }}
       />
 
-      {/* Toast notification */}
-      <div
-        className={`toast${toast ? ' toast-visible' : ''}`}
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {toast}
-      </div>
+      {/* Mobile FAB — portal to body: position:fixed immune to parent containing blocks */}
+      {createPortal(
+        <div
+          className="sm:hidden"
+          style={{
+            position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 200,
+            background: 'var(--glass-bg-heavy)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            borderTop: '1px solid var(--glass-border)',
+            paddingTop: '0.75rem',
+            paddingLeft: '1rem',
+            paddingRight: '1rem',
+            paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
+          }}
+        >
+          <DownloadButtons {...downloadBtnsProps} />
+        </div>,
+        document.body
+      )}
+
+      {/* Toast — portal to body for same reason */}
+      {createPortal(
+        <div
+          className={`toast${toast ? ' toast-visible' : ''}`}
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {toast}
+        </div>,
+        document.body
+      )}
     </>
   )
 }
