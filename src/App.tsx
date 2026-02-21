@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Header, type TabId } from './components/Header'
 import { GeneratorTab } from './components/generator/GeneratorTab'
-import { DecoderTab } from './components/decoder/DecoderTab'
 import { useTheme } from './hooks/useTheme'
 import './App.css'
+
+const DecoderTab = lazy(async () => {
+  const mod = await import('./components/decoder/DecoderTab')
+  return { default: mod.DecoderTab }
+})
 
 function App() {
   const { theme, toggle } = useTheme()
@@ -61,7 +65,23 @@ function App() {
           aria-labelledby="decoder-tab"
           hidden={activeTab !== 'decoder'}
         >
-          <DecoderTab />
+          {activeTab === 'decoder' ? (
+            <Suspense
+              fallback={
+                <p
+                  style={{
+                    color: 'var(--text-dim)',
+                    fontSize: '0.8rem',
+                    fontFamily: 'var(--font-mono)',
+                  }}
+                >
+                  // 載入解碼器中...
+                </p>
+              }
+            >
+              <DecoderTab />
+            </Suspense>
+          ) : null}
         </div>
       </main>
     </div>

@@ -91,7 +91,6 @@ export default defineConfig(({ command, mode }) => {
           manualChunks: {
             'vendor-react': ['react', 'react-dom'],
             'vendor-qr-gen': ['qr-code-styling'],
-            'vendor-qr-scan': ['qr-scanner'],
             'vendor-icons': ['lucide-react'],
           },
         },
