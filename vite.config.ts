@@ -28,10 +28,12 @@ function createSeoAssetsPlugin(siteUrl: string): Plugin {
         .replaceAll('%SOCIAL_IMAGE_URL%', socialImageUrl)
     },
     generateBundle() {
+      // Content-Signal must stay inside the User-agent group (before any blank line).
+      // Values match zinzan.info; ai-input is intentionally left undeclared.
       this.emitFile({
         type: 'asset',
         fileName: 'robots.txt',
-        source: `User-agent: *\nAllow: /\nSitemap: ${siteBase}/sitemap.xml\n`,
+        source: `User-agent: *\nContent-Signal: search=yes, ai-train=no, use=reference\nAllow: /\nSitemap: ${siteBase}/sitemap.xml\n`,
       })
       this.emitFile({
         type: 'asset',
